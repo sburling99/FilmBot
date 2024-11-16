@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: MovieBot
+bot:
+  token: 'MTMwNzA3OTU5NjM2OTM4MzQyNQ.GJGDuW.HftiYfHbqvcW6I9U46juG0T79qfXT_NB7roAa4'
