@@ -18,15 +18,18 @@ public class DiscordEventListener extends ListenerAdapter {
         {
             case "find-film-details-by-name":
                 Optional<OptionMapping> content = Optional.ofNullable(event.getOption("film_name"));
-                try {
-                    event.reply(content.isEmpty() ? "Please enter a movie" : controller.findFilmDetailsByName(content.get().getAsString()))
+                if (content.isPresent()) {
+                    try {
+                        controller.findFilmDetailsByName(content.get().getAsString(), event);
+                    } catch (IOException | InterruptedException e) {
+                        throw new RuntimeException(e);
+                    }
+                } else {
+                    event.reply("Please enter a film")
                             .addComponents()
                             .queue();
-                } catch (IOException e) {
-                    throw new RuntimeException(e);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
                 }
+
                 break;
             default:
                 event.reply("I can't handle that command right now :(").setEphemeral(true).queue();

@@ -8,10 +8,10 @@
 		<version>3.3.5</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.moviebot</groupId>
+	<groupId>com.FilmBot</groupId>
 	<artifactId>demo</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>MovieBot</name>
+	<name>filmBot</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
