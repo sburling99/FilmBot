@@ -1,4 +1,4 @@
-package com.moviebot;
+package com.filmbot;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

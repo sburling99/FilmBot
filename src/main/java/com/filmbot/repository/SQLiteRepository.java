@@ -1,4 +1,4 @@
-package com.moviebot.repository;
+package com.filmbot.repository;
 
 public class SQLiteRepository {
 }

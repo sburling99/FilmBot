@@ -1,15 +1,19 @@
-package com.moviebot;
+package com.filmbot;
 
-import com.moviebot.controller.DiscordController;
+import com.filmbot.controller.DiscordController;
+import com.filmbot.listener.DiscordEventListener;
 import net.dv8tion.jda.api.JDA;
 import net.dv8tion.jda.api.JDABuilder;
 import net.dv8tion.jda.api.entities.Activity;
+import net.dv8tion.jda.api.interactions.commands.build.Commands;
 import net.dv8tion.jda.api.requests.GatewayIntent;
-import org.springframework.beans.factory.annotation.Value;
+import net.dv8tion.jda.api.requests.restaction.CommandListUpdateAction;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.EnumSet;
+
+import static net.dv8tion.jda.api.interactions.commands.OptionType.STRING;
 
 @SpringBootApplication
 public class FilmBotApplication {
@@ -38,8 +42,14 @@ public class FilmBotApplication {
 	public static void main(String[] args) {
 		JDA jda = JDABuilder.createLight(System.getenv("BOT_TOKEN"), intents)
 				.setActivity(Activity.watching("Learning....."))
-				.addEventListeners(new DiscordController())
+				.addEventListeners(new DiscordEventListener())
 				.build();
+		CommandListUpdateAction commandListUpdateActions = jda.updateCommands();
+		commandListUpdateActions.addCommands(
+				Commands.slash("find-film-details-by-name", "Type name of film to retrieve details from TMDB")
+						.addOption(STRING, "film_name", "Name of film to search", true)
+		);
+		commandListUpdateActions.queue();
 		SpringApplication.run(FilmBotApplication.class, args);
 	}
 
